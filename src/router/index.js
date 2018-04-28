@@ -38,6 +38,28 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/metadata',
+    component: Layout,
+    redirect: '/metadata/infoSet',
+    name: 'Metadata',
+    meta: { title: '元数据', icon: 'example' },
+    children: [
+      {
+        path: 'infoSet',
+        name: 'InfoSet',
+        component: () => import('@/views/infoSet/index'),
+        meta: { title: '信息集', icon: 'table' }
+      },
+      {
+        path: 'function',
+        name: 'Function',
+        component: () => import('@/views/function/index'),
+        meta: { title: '功能项', icon: 'table' }
+      }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
