@@ -1,9 +1,9 @@
 import request from '@/utils/request'
 
-export function getList(params) {
+export function getList() {
   return request({
     url: '/api/infoSet',
-    method: 'get',
-    params
+    // url: '/user/info',
+    method: 'get'
   })
 }

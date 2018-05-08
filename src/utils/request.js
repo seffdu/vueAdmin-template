@@ -27,8 +27,18 @@ service.interceptors.response.use(
   /**
   * code为非20000是抛错 可结合自己业务进行修改
   */
+    if (response.status >= 300) {
+      Message({
+        message: '请求异常，状态码：' + response.status,
+        type: 'error',
+        duration: 5 * 1000
+      })
+      return Promise.reject('error')
+    }
+
+    const isRestApi = response.config.url.indexOf('/api/') >= 0
     const res = response.data
-    if (res.code !== 20000) {
+    if (res.code !== 20000 && !isRestApi) {
       Message({
         message: res.message,
         type: 'error',

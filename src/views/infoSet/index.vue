@@ -3,10 +3,9 @@
     <el-button type="primary" @click="onAdd" class="btn" >新增</el-button>
     <el-button type="primary" @click="onUpdate">修改</el-button>
     <el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
-      <el-table-column align="center" label='ID' width="95">
-        <template slot-scope="scope">
-          {{scope.$index}}
-        </template>
+      <el-table-column label="序号" align="center"
+        type="index"
+        width="50">
       </el-table-column>
       <el-table-column label="表名">
         <template slot-scope="scope">
@@ -39,48 +38,48 @@
 </template>
 
 <script>
-import { getList } from '@/api/infoSet'
+import { getList } from "@/api/infoSet";
 
 export default {
   data() {
     return {
       list: null,
       listLoading: true
-    }
+    };
   },
   filters: {
     statusFilter(status) {
       const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
-      }
-      return statusMap[status]
+        published: "success",
+        draft: "gray",
+        deleted: "danger"
+      };
+      return statusMap[status];
     }
   },
   created() {
-    this.fetchData()
+    this.fetchData();
   },
   methods: {
     fetchData() {
-      this.listLoading = true
-      getList(this.listQuery).then(response => {
-        this.list = response.data._embedded.infoSet
-        this.listLoading = false
-      })
+      this.listLoading = true;
+      getList().then(response => {
+        this.list = response._embedded.infoSet;
+        this.listLoading = false;
+      });
     },
     onAdd() {
-      this.$message('add!')
+      this.$message("add!");
     },
     onUpdate() {
-      this.$message('update!')
+      this.$message("update!");
     }
   }
-}
+};
 </script>
 
 <style scoped>
-.btn{
+.btn {
   margin-bottom: 20px;
 }
 </style>
