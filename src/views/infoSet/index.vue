@@ -38,44 +38,44 @@
 </template>
 
 <script>
-import { getList } from "@/api/infoSet";
+import { getList } from '@/api/infoSet'
 
 export default {
   data() {
     return {
       list: null,
       listLoading: true
-    };
+    }
   },
   filters: {
     statusFilter(status) {
       const statusMap = {
-        published: "success",
-        draft: "gray",
-        deleted: "danger"
-      };
-      return statusMap[status];
+        published: 'success',
+        draft: 'gray',
+        deleted: 'danger'
+      }
+      return statusMap[status]
     }
   },
   created() {
-    this.fetchData();
+    this.fetchData()
   },
   methods: {
     fetchData() {
-      this.listLoading = true;
+      this.listLoading = true
       getList().then(response => {
-        this.list = response._embedded.infoSet;
-        this.listLoading = false;
-      });
+        this.list = response._embedded.infoSet
+        this.listLoading = false
+      })
     },
     onAdd() {
-      this.$message("add!");
+      this.$message('add!')
     },
     onUpdate() {
-      this.$message("update!");
+      this.$message('update!')
     }
   }
-};
+}
 </script>
 
 <style scoped>
